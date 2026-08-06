@@ -62,10 +62,12 @@ function buildChapters() {
 }
 
 // ===== Load daily words (fast, ~27KB) =====
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export async function loadDailyWords(): Promise<void> {
   if (dailyLoaded) return;
   try {
-    const res = await fetch("/daily-words.json");
+    const res = await fetch(`${BASE}/daily-words.json`);
     const data: (string | number)[][] = await res.json();
 
     dailyWords.length = 0;
@@ -95,7 +97,7 @@ export async function loadDailyWords(): Promise<void> {
 export async function loadFullWords(): Promise<void> {
   if (fullLoaded) return;
   try {
-    const res = await fetch("/words-data.json");
+    const res = await fetch(`${BASE}/words-data.json`);
     const data: (string | number)[][] = await res.json();
 
     allWords.length = 0;
